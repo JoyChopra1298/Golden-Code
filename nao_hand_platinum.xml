@@ -1,0 +1,64 @@
+<mujoco model="NaoH25V50">
+    <compiler angle="radian" meshdir="./nao_meshes/meshes/V40/"/>
+    <option integrator="RK4"/>
+
+    <default>
+        <joint  armature="1" damping="1"/>
+    </default>
+    <size njmax="500" nconmax="100" />
+    <asset>
+        <mesh name="RShoulderPitch_0.10" file="RShoulderPitch_0.10.stl" scale="0.1 0.1 0.1" />
+        <mesh name="RShoulderRoll_0.10" file="RShoulderRoll_0.10.stl" scale="0.1 0.1 0.1" />
+        <mesh name="RElbowRoll_0.10" file="RElbowRoll_0.10.stl" scale="0.1 0.1 0.1" />
+        <mesh name="RWristYaw_0.10" file="RWristYaw_0.10.stl" scale="0.1 0.1 0.1" />
+        <mesh name="RFinger21_0.10" file="RFinger21_0.10.stl" scale="0.1 0.1 0.1" />
+        <mesh name="RFinger22_0.10" file="RFinger22_0.10.stl" scale="0.1 0.1 0.1" />
+        <mesh name="RFinger23_0.10" file="RFinger23_0.10.stl" scale="0.1 0.1 0.1" />
+        <mesh name="RFinger11_0.10" file="RFinger11_0.10.stl" scale="0.1 0.1 0.1" />
+        <mesh name="RFinger12_0.10" file="RFinger12_0.10.stl" scale="0.1 0.1 0.1" />
+        <mesh name="RFinger13_0.10" file="RFinger13_0.10.stl" scale="0.1 0.1 0.1" />
+        <mesh name="RThumb1_0.10" file="RThumb1_0.10.stl" scale="0.1 0.1 0.1" />
+        <mesh name="RThumb2_0.10" file="RThumb2_0.10.stl" scale="0.1 0.1 0.1" />
+        <texture builtin="checker" height="100" name="texplane" rgb1="0 0 0" rgb2="0.8 0.8 0.8" type="2d" width="100"/>
+        <material name="MatPlane" reflectance="0.5" shininess="1" specular="1" texrepeat="60 60" texture="texplane"/>
+    </asset>
+
+    <worldbody>
+                <geom contype="1" conaffinity="1" condim="3" friction="1 .1 .1" material="MatPlane" name="floor" pos="0 0 -0.335" rgba="0.8 0.9 0.8 1" size="20 20 0.125" type="plane"/>
+
+                
+           
+
+                <body name="RBicep" pos="0 0 0" quat="1 0 1 0">
+                    <!-- <joint name="RShoulderZ" type="slide" axis="0 0 1"/> -->
+                    <inertial pos="0.0213201 -0.00466808 0.0004386" quat="0.527557 0.52235 0.47264 0.474811" mass="1.7996" diaginertia="0.00363268 0.00337871 0.000658873" />
+                    <joint name="RShoulderRoll" pos="0 0 0" axis="0 1 0"   type="hinge"/>
+                    <joint name="RShoulderPitch" pos="0 0 0" axis="0 0 1"     type="hinge"/>
+                    <geom contype="2" conaffinity="1" type="mesh" rgba="0.3 0.1 0.6 1" mesh="RShoulderRoll_0.10" />
+                    
+        <body name="RElbow" pos="0.105 -0.015 0">
+                        <inertial pos="-0.02744 0 -0.00014" quat="-0.000545392 0.711779 -0.000696018 0.702403" mass="0.395499" diaginertia="0.000168578 0.000162384 3.41143e-05" />
+                        <joint name="RElbowYaw" pos="0 0 0" axis="0 1 0"  />
+                        <body name="RForeArm" pos="0 0 0">
+                            <inertial pos="0.0235942 -0.00369779 0.00274973" quat="0.397369 0.35311 0.66416 0.525645" mass="0.455913" diaginertia="0.000171173 0.000151629 0.000108766" />
+                            <joint name="RElbowRoll" pos="0 0 0" axis="0 0 1"  />
+                            <geom contype="2" conaffinity="1" type="mesh" rgba="0.8 0.2 1 1" mesh="RElbowRoll_0.10" />
+
+                </body>                  
+                </body>
+                </body>
+
+         
+    </worldbody>
+    <actuator>
+        
+        <position   gear="200.0" joint="RShoulderPitch" />
+        <position   gear="200.0" joint="RShoulderRoll" />
+        <position   gear="200.0" joint="RElbowYaw" />
+        <position   gear="200.0" joint="RElbowRoll" />
+        <!-- <position  gear="200.0" joint="RShoulderZ" /> -->
+        
+    </actuator>
+</mujoco>    
+
+
